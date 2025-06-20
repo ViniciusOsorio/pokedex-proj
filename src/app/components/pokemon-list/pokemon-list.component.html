@@ -1,0 +1,10 @@
+<h2>Lista de Pokémon</h2>
+<div class="pokemon-grid">
+  <div *ngFor="let pokemon of pokemonList" class="pokemon-card">
+    <a [routerLink]="['/pokemon', pokemon.id]">
+      <img [src]="pokemon.image" alt="{{pokemon.name}}">
+      <p>#{{ pokemon.id }}</p>
+      <h3>{{pokemon.name | titlecase}}</h3>
+    </a>
+  </div>
+</div>
