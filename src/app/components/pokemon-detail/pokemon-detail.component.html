@@ -33,6 +33,10 @@
         </li>
       </ul>
     </div>
+    <div class="nav-buttons">
+      <button (click)="goToPreviousPokemon()" [disabled]="currentPokemonId <= 1 || loading">Anterior</button>
+      <button (click)="goToNextPokemon()" [disabled]="currentPokemonId >= 1025 || loading">Próximo</button>
+    </div>
     <a routerLink="/" class="back-button">Voltar</a>
   </div>
 </div>

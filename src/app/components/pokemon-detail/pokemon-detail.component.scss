@@ -23,6 +23,21 @@
   align-items: center;
 }
 
+.pkmn-sprite{
+  width:90px;
+  height:90px;
+}
+
+.sprite-brdr{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid grey;
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+}
+
 .pokemon-detail-card h1 {
   font-size: 2.2em;
   margin-top: 5px;
@@ -60,6 +75,10 @@
   color: #444;
 }
 
+.details-section ul{
+  padding-left: 0px;
+}
+
 .back-button{
   display: inline-block;
   margin-top: 30px;
@@ -82,22 +101,34 @@
   padding: 20px;
 }
 
-.pkmn-sprite{
-  width:90px;
-  height:90px;
-}
-
-.sprite-brdr{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid grey;
-  border-radius: 50%;
-  width: 110px;
-  height: 110px;
-}
-
 .h-and-w{
   font-size: 0.8em;
   margin-top: 5px;
+}
+
+.nav-buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding: 0 10px;
+}
+
+.nav-buttons button{
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+}
+
+.nav-buttons button:hover:not([disabled]){
+  background-color: #0056b3;
+}
+
+.nav-buttons button:disabled{
+  background-color: #ccc;
+  cursor: not-allowed;
 }

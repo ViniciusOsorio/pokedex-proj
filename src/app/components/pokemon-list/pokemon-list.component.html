@@ -1,10 +1,21 @@
 <h2>Lista de Pokémon</h2>
-<div class="pokemon-grid">
-  <div *ngFor="let pokemon of pokemonList" class="pokemon-card">
-    <a [routerLink]="['/pokemon', pokemon.id]">
-      <img [src]="pokemon.image" alt="{{pokemon.name}}">
-      <p>#{{ pokemon.id }}</p>
-      <h3>{{pokemon.name | titlecase}}</h3>
-    </a>
-  </div>
+<div *ngIf="loading" class="loading-full-screen">
+  <div class="spinner"></div>
+  <p>Catching'Em All...</p>
+</div>
+
+<div *ngIf="error" class="error-message-full-screen">
+  <p>Erro ao carregar. Por favor, tente novamente mais tarde.</p>
+</div>
+
+<div *ngIf="!loading && !error" class="pokemon-list-container">
+  <cdk-virtual-scroll-viewport itemSize="140" class="pokemon-virtual-scroll-viewport">
+    <div *cdkVirtualFor="let pokemon of pokemonList" class="pokemon-card-wrapper">
+      <a [routerLink]="['/pokemon', pokemon.id]" class="pokemon-card">
+        <img [src]="pokemon.image" alt="{{pokemon.name}}">
+        <p>#{{ pokemon.id }}</p>
+        <h3>{{pokemon.name | titlecase}}</h3>
+      </a>
+    </div>
+  </cdk-virtual-scroll-viewport>  
 </div>

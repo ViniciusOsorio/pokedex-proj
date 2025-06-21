@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -11,10 +12,13 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     RouterModule,
+    ScrollingModule,
   ]
 })
 export class PokemonListComponent implements OnInit{
   pokemonList: any[] = [];
+  loading: Boolean = true;
+  error: Boolean = false;
 
   constructor(private pokemonService: PokemonService){}
 
@@ -23,20 +27,16 @@ export class PokemonListComponent implements OnInit{
   }
 
   getPokemon(){
-    this.pokemonService.getPokemonList(151).subscribe(response => {
-      this.pokemonList = response.results;
-      this.pokemonList.forEach((pokemon: any, index: number) => {
-        const id = pokemon.url.split('/').filter(Boolean).pop();
-        this.pokemonService.getPokemonDetails(id).subscribe(details => {
-          console.log(details)
-          this.pokemonList[index] = {
-            ...this.pokemonList[index],
-            id: details.id,
-            name: details.name,
-            image: details.sprites.front_default,
-          }
-        })
-      })
+    this.pokemonService.getPokemonList(0, 1500).subscribe({
+      next: (data) => {
+        this.pokemonList = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Erro ao buscar lista de Pokémon: ', err);
+        this.loading = false;
+        this.error = true;
+      }      
     })
   }
 
